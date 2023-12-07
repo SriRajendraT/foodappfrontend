@@ -107,7 +107,7 @@ body {
       background-size: cover;
   }
   .tblb{
-      backdrop-filter:blur(10px);
+      backdrop-filter:blur(7px);
   }
   
   .bgblur {
