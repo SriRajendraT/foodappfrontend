@@ -21,9 +21,10 @@ export class HomeComponent implements OnInit {
 
  getRecipesList() {
      this.dataapi.getRecipeList().subscribe((result: ApiResponse<RecipeDetails[]>) => {
-     
       if (result) {
         this.recipies = result.Result;
+        console.log(result.Result,"Booran");
+        
       }
     });
   }

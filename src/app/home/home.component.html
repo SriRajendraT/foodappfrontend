@@ -14,15 +14,15 @@
             <div class="col-12 h-50 ">
                 <table class="table table-striped text-center">
                     <tr>
-                        <th>Action</th>
-                        <th>Recipe</th>
-                        <th>No Of Ingredients</th>
+                        <th class="text-light ">Action</th>
+                        <th class="text-light ">Recipe</th>
+                        <th class="text-light ">No Of Ingredients</th>
                     </tr>
                     <tr *ngFor="let item of recipies">
                         <td class="options">
-                            <a href="#"><i class="fa-solid fa-eye"></i></a>
-                            <a href="#"><i class="fa fa-edit"></i></a>
-                            
+                            <a href="#" ><i class="fa-solid fa-eye text-info "></i></a>
+                            <a href="#" ><i class="fa fa-edit text-warning "></i></a>
+                            <span class=""></span>
                         </td>
                         <td class="text-light">{{item.RECIPE_NAME}}</td>
                         <td class="text-light">{{item.TotalIngredients}}</td>
