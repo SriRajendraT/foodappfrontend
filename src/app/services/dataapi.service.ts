@@ -13,8 +13,8 @@ export class DataApiService {
     apiUrl="https://localhost:7038/api/Food/";
     constructor(private http: HttpClient){}
 
-    getRecipeList():Observable<ApiResponse<RecipeDetails[]>> {
-        return this.http.post<ApiResponse<RecipeDetails[]>>(this.apiUrl+'GetRecipeList','');
+  getRecipeList():Observable<ApiResponse<RecipeDetails[]>> {
+        return  this.http.post<any>(this.apiUrl+'GetRecipeList','');
     }
 
 }

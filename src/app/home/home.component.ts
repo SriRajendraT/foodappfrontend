@@ -19,8 +19,9 @@ export class HomeComponent implements OnInit {
     this.getRecipesList();
   }
 
-  getRecipesList() {
-    this.dataapi.getRecipeList().subscribe((result: ApiResponse<RecipeDetails[]>) => {
+ getRecipesList() {
+     this.dataapi.getRecipeList().subscribe((result: ApiResponse<RecipeDetails[]>) => {
+     
       if (result) {
         this.recipies = result.Result;
       }
