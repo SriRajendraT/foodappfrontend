@@ -22,7 +22,14 @@
                         <td class="options">
                             <a href="#" ><i class="fa-solid fa-eye text-info "></i></a>
                             <a href="#" ><i class="fa fa-edit text-warning "></i></a>
-                            <span class=""></span>
+                            <span>
+                                <div *ngIf="item.FAVOURITES=='Y'">
+                                    <i class="fa-solid c-pink fa-heart"></i>
+                                </div>
+                                <div *ngIf="item.FAVOURITES!='Y'">
+                                    <i class="fa-regular fa-heart"></i>
+                                </div>
+                            </span>
                         </td>
                         <td class="text-light">{{item.RECIPE_NAME}}</td>
                         <td class="text-light">{{item.TotalIngredients}}</td>
