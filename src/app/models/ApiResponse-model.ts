@@ -1,6 +1,6 @@
-export class ApiResponse {
+export class ApiResponse<T> {
     Success!:boolean;
-    Result!:any;
+    Result!:T;
     Message!:string;
     StatusCode!:number;
 
