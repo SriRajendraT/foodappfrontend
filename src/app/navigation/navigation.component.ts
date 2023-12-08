@@ -18,6 +18,6 @@ export class NavigationComponent implements OnInit {
   getFav(){
     console.log('get fav');
     
-   this.router.navigate(['favourite']);
+   this.router.navigate(['/favourite']);
   }
 }

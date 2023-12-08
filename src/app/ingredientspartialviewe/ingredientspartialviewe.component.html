@@ -1,44 +1,122 @@
 <!-- <p>ingredientspartialviewe works!</p> -->
 <!-- @model List<Ingredient> -->
 
-    <div class="bgimg">
-        <div class="modal-header">
-            <h5 class="modal-title text-light" id="staticBackdropLabel">Ingredients : </h5>
-            <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body tblb">
-            <div class="row">
-                <div class="col-6  text-info"><h5>Item Name</h5></div>
-                <div class="col-6   text-info"><h5>Item Quantity</h5></div>
-            </div>
-    
-            
-                <div class="row ing">
-                    <div class="col-6">
-                        <!-- @Html.TextBox($"Ingredients[{i}].INGREDIENT_NAME",Model[i].INGREDIENT_NAME,new {@class="form-control Name bgblur text-light",@placeholder="Name"}) -->
-                    </div>
-                    <div class="col-6">
-                        <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
-                    </div>
-                    <!-- @Html.Hidden($"Ingredients[{i}].RECIPE_ID",Model[i].RECIPE_ID ,new {@class="recipe_id"})
-                    @Html.Hidden($"Ingredients[{i}].ID",Model[i].ID ,new {@class="id"}) -->
-                </div>
-    
-        </div>
-        <div class="modal-footer">
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center align-items-center">
-                    <div class="btn-group">
-                        
-                            <button class="btn btn-danger" type="button" id="delbtn">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        <button class="btn btn-success" type="button" id="addbtn"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-    
-                </div>
-            </div>
-        </div>
-    
+<div class="bgimg">
+  <div class="modal-header">
+    <h5 class="modal-title text-light" id="staticBackdropLabel">
+      Ingredients :
+    </h5>
+    <button
+      type="button"
+      class="btn-close bg-danger"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body tblb">
+    <div class="row">
+      <div class="col-6 text-info"><h5>Item Name</h5></div>
+      <div class="col-6 text-info"><h5>Item Quantity</h5></div>
     </div>
+    <div class="row ing">
+      <div class="col-6">
+        <!-- @Html.TextBox($"Ingredients[{i}].INGREDIENT_NAME",Model[i].INGREDIENT_NAME,new {@class="form-control Name bgblur text-light",@placeholder="Name"}) -->
+      </div>
+      <div class="col-6">
+        <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
+      </div>
+      <!-- @Html.Hidden($"Ingredients[{i}].RECIPE_ID",Model[i].RECIPE_ID ,new {@class="recipe_id"})
+                    @Html.Hidden($"Ingredients[{i}].ID",Model[i].ID ,new {@class="id"}) -->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center align-items-center">
+        <div class="btn-group">
+          <button class="btn btn-danger" type="button" id="delbtn">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          <button class="btn btn-success" type="button" id="addbtn">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <script>
+        $(document).on('click', '#delbtn', function () {
+            if ($('.partial .ing').length > 1) {
+                let ing = $('.partial .ing:last');
+                if (ing.find('input.id').val() != '0') {
+                    $.ajax({
+                        url: '@Url.Action("DeleteIngrediants","Home")',
+                        data: { id: ing.find('input.id').val() },
+                        type: 'POST',
+                        success: function (res) {
+                            if (res["success"]) {
+                                ing.remove()
+                                $('#staticBackdropLabel').text('Ingredients : ' + $('.partial .ing').length)
+                            }
+                        }
+                    })
+                } else {
+                    ing.remove()
+                    $('#staticBackdropLabel').text('Ingredients : ' + $('.partial .ing').length)
+                }
+                // let ing = $('.partial .ing:last');
+                // $('.partial .ing:last').remove()
+            }
+            if ($('.partial .ing').length == 1)
+                $(this).remove()
+        })
     
+        $(document).on('click', '#delrecipe', function () {
+            $.ajax({
+                url: '@Url.Action("DeleteRecipe","Home")',
+                data: { id: $(this).data('id') },
+                type: 'POST',
+                success: function (res) {
+                    if (res['success'] == true) {
+                        alert(res['message']);
+                        window.location.href = '@Url.Action("Index","Home")'
+                    }
+                    else alert(res['message']);
+                },
+                error: function () { alert("Operation failed") }
+            })
+        })
+        function addIngredient() {
+            let data = [];
+            $('.ing').each((i, e) =>
+                data.push({
+                    INGREDIENT_NAME: $(e).find('input.Name').val(),
+                    QUANTITY: $(e).find('input.Quantity').val(),
+                    RECIPE_ID: $(e).find('input.recipe_id').val(),
+                    ID: $(e).find('input.id').val(),
+                })
+            )
+            data.push({
+                INGREDIENT_NAME: '',
+                QUANTITY: '',
+                RECIPE_ID: 0,
+                ID: 0,
+            })
+            $.ajax({
+                url: '@Url.Action("LoadIngredients","Home")',
+                type: 'POST',
+                data: { data: JSON.stringify(data) },
+                success: function (res) {
+                    $('.partial').html(res)
+                },
+                error: function () {
+                    alert("error")
+                }
+            })
+        }
+        $(document).on('click', '#addbtn', addIngredient)
+        $(document).on('click', '.show-ing', function () {
+            if ($('.partial .ing').length == 0)
+                addIngredient()
+        })
+    </script> -->

@@ -49,7 +49,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-4 "></div>
+                <div class="col-md-6">
                     <!-- <button type="submit" class="btn btn-@(Model.ID > 0 ? "warning" : "primary")">@($"{(Model.ID > 0 ? "Edit" : "Add")} recipe")</button> -->
                     <!-- @if (Model.ID > 0)
                     {
@@ -57,86 +58,13 @@
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     } -->
+                    <button type="submit" class="btn btn-primary ">Add Recipe</button>
+                    <button type="button" class="btn btn-danger "><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
         </form>
 
     </div>
 
-    <script>
-        $(document).on('click', '#delbtn', function () {
-            if ($('.partial .ing').length > 1) {
-                let ing = $('.partial .ing:last');
-                if (ing.find('input.id').val() != '0') {
-                    $.ajax({
-                        url: '@Url.Action("DeleteIngrediants","Home")',
-                        data: { id: ing.find('input.id').val() },
-                        type: 'POST',
-                        success: function (res) {
-                            if (res["success"]) {
-                                ing.remove()
-                                $('#staticBackdropLabel').text('Ingredients : ' + $('.partial .ing').length)
-                            }
-                        }
-                    })
-                } else {
-                    ing.remove()
-                    $('#staticBackdropLabel').text('Ingredients : ' + $('.partial .ing').length)
-                }
-                // let ing = $('.partial .ing:last');
-                // $('.partial .ing:last').remove()
-            }
-            if ($('.partial .ing').length == 1)
-                $(this).remove()
-        })
     
-        $(document).on('click', '#delrecipe', function () {
-            $.ajax({
-                url: '@Url.Action("DeleteRecipe","Home")',
-                data: { id: $(this).data('id') },
-                type: 'POST',
-                success: function (res) {
-                    if (res['success'] == true) {
-                        alert(res['message']);
-                        window.location.href = '@Url.Action("Index","Home")'
-                    }
-                    else alert(res['message']);
-                },
-                error: function () { alert("Operation failed") }
-            })
-        })
-        function addIngredient() {
-            let data = [];
-            $('.ing').each((i, e) =>
-                data.push({
-                    INGREDIENT_NAME: $(e).find('input.Name').val(),
-                    QUANTITY: $(e).find('input.Quantity').val(),
-                    RECIPE_ID: $(e).find('input.recipe_id').val(),
-                    ID: $(e).find('input.id').val(),
-                })
-            )
-            data.push({
-                INGREDIENT_NAME: '',
-                QUANTITY: '',
-                RECIPE_ID: 0,
-                ID: 0,
-            })
-            $.ajax({
-                url: '@Url.Action("LoadIngredients","Home")',
-                type: 'POST',
-                data: { data: JSON.stringify(data) },
-                success: function (res) {
-                    $('.partial').html(res)
-                },
-                error: function () {
-                    alert("error")
-                }
-            })
-        }
-        $(document).on('click', '#addbtn', addIngredient)
-        $(document).on('click', '.show-ing', function () {
-            if ($('.partial .ing').length == 0)
-                addIngredient()
-        })
-    </script>
 </div>
