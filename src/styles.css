@@ -92,6 +92,9 @@ body {
   .options>a {
     background: transparent;
   }
+  .options>i{
+    background: transparent;
+  }
   .options>span {
     background: transparent;
   }

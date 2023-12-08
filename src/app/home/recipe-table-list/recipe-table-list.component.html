@@ -1,0 +1,39 @@
+<!-- <p>recipe-table-list works!</p> -->
+<div class="container mt-3 tblb">
+    <h3 class="text-light">Your Recipe</h3>
+    <hr>
+    <div class="row mt-3 mb-3">
+        <div class="col-12 d-start">
+            <button type="button" class="btn btn-primary"  (click)="addRecipe()">
+                <i class="fa-solid fa-plus" ></i>
+            </button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 h-50 ">
+            <table class="table table-striped text-center">
+                <tr>
+                    <th class="text-light ">Action</th>
+                    <th class="text-light ">Recipe</th>
+                    <th class="text-light ">No Of Ingredients</th>
+                </tr>
+                <tr *ngFor="let item of recipies">
+                    <td class="options">
+                       <i class="fa-solid fa-eye text-info " (click)="onView(item.ID)"></i>
+                        <i class="fa fa-edit text-warning "></i>
+                        <span class="options" id="Favourite">
+                            <div *ngIf="item.FAVOURITES=='Y'" (click)="changeFav(item.ID,false)" style="cursor: pointer;">
+                                <i class="fa-solid c-pink fa-heart"></i>
+                            </div>
+                            <div *ngIf="item.FAVOURITES!='Y'" (click)="changeFav(item.ID,true)" style="cursor: pointer;">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </span>
+                    </td>
+                    <td class="text-light">{{item.RECIPE_NAME}}</td>
+                    <td class="text-light">{{item.TotalIngredients}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

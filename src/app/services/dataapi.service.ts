@@ -32,6 +32,17 @@ export class DataApiService {
        return this.http.post<ApiResponse<boolean>>(this.apiUrl+'ChangeFav',kv);
     }
 
+    getFav():Observable<ApiResponse<RecipeDetails[]>>{
+        return this.http.post<ApiResponse<RecipeDetails[]>>(this.apiUrl+'GetFavourites','');
+    }
+
+    getReceipeById(kv:KeyValues):Observable<ApiResponse<RecipeDetails>>{
+        return this.http.post<ApiResponse<RecipeDetails>>(this.apiUrl+'GetRecipeById',kv);
+    }
+
+    addRecipe(request:ApiResponse<RecipeDetails>){
+        return this.http.post<ApiResponse<RecipeDetails>>(this.apiUrl+'SaveRecipe',request);
+    }
     private handleError(err:HttpErrorResponse):Observable<never>{
         
             console.log(err);
