@@ -4,6 +4,7 @@ import { Recipe } from "../models/Recipe-model";
 import { ApiResponse } from "../models/ApiResponse-model";
 import { Injectable } from "@angular/core";
 import { RecipeDetails } from "../models/RecipeDetails-model";
+import { KeyValues } from "../models/KeyValues-model";
 
 @Injectable({
     providedIn: 'root',
@@ -20,12 +21,15 @@ export class DataApiService {
                 return r;
             }),
             finalize(()=>{
-
             }),
             catchError((err:HttpErrorResponse)=>{
                 return this.handleError(err);
             })
         )
+    }
+
+    changeFav(kv:KeyValues):Observable<ApiResponse<boolean>>{
+       return this.http.post<ApiResponse<boolean>>(this.apiUrl+'ChangeFav',kv);
     }
 
     private handleError(err:HttpErrorResponse):Observable<never>{

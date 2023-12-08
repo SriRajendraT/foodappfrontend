@@ -22,11 +22,11 @@
                         <td class="options">
                             <a href="#" ><i class="fa-solid fa-eye text-info "></i></a>
                             <a href="#" ><i class="fa fa-edit text-warning "></i></a>
-                            <span class="options">
-                                <div *ngIf="item.FAVOURITES=='Y'">
+                            <span class="options" id="Favourite">
+                                <div *ngIf="item.FAVOURITES=='Y'" (click)="changeFav(item.ID,false)" style="cursor: pointer;">
                                     <i class="fa-solid c-pink fa-heart"></i>
                                 </div>
-                                <div *ngIf="item.FAVOURITES!='Y'">
+                                <div *ngIf="item.FAVOURITES!='Y'" (click)="changeFav(item.ID,true)" style="cursor: pointer;">
                                     <i class="fa-regular fa-heart"></i>
                                 </div>
                             </span>
