@@ -18,15 +18,20 @@
       <div class="col-6 text-info"><h5>Item Name</h5></div>
       <div class="col-6 text-info"><h5>Item Quantity</h5></div>
     </div>
-    <form action="">
-    <div class="row ing">
+    <form [formGroup]="ingredientsForm" >
+    <div class="row ing" *ngFor="let item of ingredints">
       <div class="col-6">
-        
+        <input type="text"  class="form-control Name bgblur text-light " placeholder="Name" >
+        {{item.INGREDIENT_NAME}}
         <!-- @Html.TextBox($"Ingredients[{i}].INGREDIENT_NAME",Model[i].INGREDIENT_NAME,new {@class="form-control Name bgblur text-light",@placeholder="Name"}) -->
       </div>
       <div class="col-6">
+        <input type="text"  class="form-control Quantity bgblur text-light " placeholder="Quantity" >
+        {{item.QUANTITY}}
         <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
       </div>
+      <input type="text" hidden class="recipe_id" [value]="item.RECIPE_ID">
+      <input type="text" hidden class="id" [value]="item.ID">
       <!-- @Html.Hidden($"Ingredients[{i}].RECIPE_ID",Model[i].RECIPE_ID ,new {@class="recipe_id"})
                     @Html.Hidden($"Ingredients[{i}].ID",Model[i].ID ,new {@class="id"}) -->
     </div>
