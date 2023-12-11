@@ -27,22 +27,23 @@
                 
                 <div class="col-md-8">
                     <!-- @Html.HiddenFor(x => x.ID,new {@class="form-control"}) -->
-                    <input type="text" class="form-control " [hidden]="true"  formControlName="ID" >
+                    <input type="text" class="form-control " [hidden]="true"  formControlName="id" >
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label text-light">Recipe Name:</label>
                         <!-- @Html.TextBoxFor(x => x.RECIPE_NAME,new {@class="form-control bgblur text-light"}) -->
-                        <input type="text" class="form-control bgblur text-light" formControlName="RECIPE_NAME">
+                        <input type="text" class="form-control bgblur text-light" formControlName="recipe_name">
                     </div>
                     <div class="mb-3 ">
                         <label for="pwd" class="form-label text-light ">Steps:</label>
                         <!-- @Html.TextAreaFor(x => x.DESCRIPTION,new {@class="form-control bgblur text-light",@rows="10"}) -->
-                        <textarea type="text" name="" id="" class="form-control bgblur text-light" rows="10" formControlName="DESCRIPTION"></textarea>
+                        <textarea type="text" name="" id="" class="form-control bgblur text-light" rows="10" formControlName="description"></textarea>
                     </div>
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content partial">
                                 <!-- @Html.PartialAsync("IngredientPartial", Model.Ingredients) -->
-                                <app-ingredientspartialviewe></app-ingredientspartialviewe>
+
+                                <app-ingredientspartialviewe [ingredints]="recipe?.Ingredients??[]" (updatedIng)="updateIngredients($event)" ></app-ingredientspartialviewe>
                             </div>
                         </div>
                     </div>
