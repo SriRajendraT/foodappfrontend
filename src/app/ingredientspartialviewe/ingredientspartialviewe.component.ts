@@ -81,6 +81,7 @@ updateIng(id:number){
     // let vname = new Ingredient();
       // vname.INGREDIENT_NAME = 'Rj' + i;
       // vname.QUANTITY = i + 'kg';
+      debugger;
       let ing=this.ingredientsForm.value as Ingredient;
       let kv=new KeyValues();
       if(ing.ID>0){
