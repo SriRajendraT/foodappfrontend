@@ -40,8 +40,12 @@ export class DataApiService {
         return this.http.post<ApiResponse<RecipeDetails>>(this.apiUrl+'GetRecipeById',kv);
     }
 
-    addRecipe(request:ApiResponse<RecipeDetails>){
-        return this.http.post<ApiResponse<RecipeDetails>>(this.apiUrl+'SaveRecipe',request);
+    addRecipe(request:RecipeDetails):Observable<ApiResponse<boolean>>{
+        return this.http.post<ApiResponse<boolean>>(this.apiUrl+'SaveRecipe',request);
+    }
+
+    deleteIngredientById(kv:KeyValues):Observable<ApiResponse<boolean>>{
+        return this.http.post<ApiResponse<boolean>>(this.apiUrl+'DeleteIngredientById',kv);
     }
     private handleError(err:HttpErrorResponse):Observable<never>{
         

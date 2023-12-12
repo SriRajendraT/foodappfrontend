@@ -1,71 +1,110 @@
 <!-- <p>add-recipe works!</p> -->
 <div class="Container">
-    <div class="container mt-3 ">
-        <h3 class="text-light ">
-            <a href="#" routerLink='/' routerLinkActive='active'  class="text-light"><i class="fa-solid fa-arrow-left"></i></a>
-            <!-- @($"{(Model.ID > 0 ? "Edit" : "Add")} recipe") -->
-            Add Recipe
-            <i class="fa-solid fa-utensils"></i>
-           
-        </h3>
-        <hr />
-        <div class="row mt-4 mb-3">
-            <div class="col-12 d-start">
-                <button type="button" class="btn btn-info show-ing" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Show Ingredients
+  <div class="container mt-3">
+    <h3 class="text-light">
+      <a href="#" routerLink="/" routerLinkActive="active" class="text-light"
+        ><i class="fa-solid fa-arrow-left"></i
+      ></a>
+      <!-- @($"{(Model.ID > 0 ? "Edit" : "Add")} recipe") -->
+      Add Recipe
+      <i class="fa-solid fa-utensils"></i>
+    </h3>
+    <hr />
+    <div class="row mt-4 mb-3">
+      <div class="col-12 d-start">
+        <button
+          type="button"
+          class="btn btn-info show-ing"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Show Ingredients
+        </button>
+      </div>
+    </div>
+    <form [formGroup]="recipeForm">
+      <div class="row">
+        <!-- <div class="col-md-4 bgblur">
+          <img
+            src="https://cdn4.vectorstock.com/i/1000x1000/16/68/food-logo-template-vector-26541668.jpg"
+            class="img-thumbnail"
+            alt=""
+          />
+          <br />
+          <input type="file" class="form-control" />
+        </div> -->
 
-                </button>
+        <div class="col-md-12">
+          <!-- @Html.HiddenFor(x => x.ID,new {@class="form-control"}) -->
+          <input
+            type="text"
+            class="form-control"
+            [hidden]="true"
+            formControlName="ID"
+          />
+          <div class="mb-3 mt-3">
+            <label for="email" class="form-label text-light"
+              >Recipe Name:</label
+            >
+            <!-- @Html.TextBoxFor(x => x.RECIPE_NAME,new {@class="form-control bgblur text-light"}) -->
+            <input
+              type="text"
+              class="form-control bgblur text-light"
+              formControlName="RECIPE_NAME"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="pwd" class="form-label text-light">Steps:</label>
+            <!-- @Html.TextAreaFor(x => x.DESCRIPTION,new {@class="form-control bgblur text-light",@rows="10"}) -->
+            <textarea
+              type="text"
+              name=""
+              id=""
+              class="form-control bgblur text-light"
+              rows="10"
+              formControlName="DESCRIPTION"
+            ></textarea>
+          </div>
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div
+              class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+              <div class="modal-content partial">
+                <!-- @Html.PartialAsync("IngredientPartial", Model.Ingredients) -->
+
+                <app-ingredientspartialviewe
+                  [ingredints]="this.ingredientsArry ?? []"
+                  (updatedIng)="updateIngredients($event)"
+                ></app-ingredientspartialviewe>
+              </div>
             </div>
+          </div>
         </div>
-        <form [formGroup]="recipeForm">
-            <div class="row">
-                <div class="col-md-4 bgblur">
-                    <img src="https://cdn4.vectorstock.com/i/1000x1000/16/68/food-logo-template-vector-26541668.jpg" class="img-thumbnail" alt="" />
-                    <br />
-                    <input type="file" class="form-control " />
-                </div>
-                
-                <div class="col-md-8">
-                    <!-- @Html.HiddenFor(x => x.ID,new {@class="form-control"}) -->
-                    <input type="text" class="form-control " [hidden]="true"  formControlName="id" >
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label text-light">Recipe Name:</label>
-                        <!-- @Html.TextBoxFor(x => x.RECIPE_NAME,new {@class="form-control bgblur text-light"}) -->
-                        <input type="text" class="form-control bgblur text-light" formControlName="recipe_name">
-                    </div>
-                    <div class="mb-3 ">
-                        <label for="pwd" class="form-label text-light ">Steps:</label>
-                        <!-- @Html.TextAreaFor(x => x.DESCRIPTION,new {@class="form-control bgblur text-light",@rows="10"}) -->
-                        <textarea type="text" name="" id="" class="form-control bgblur text-light" rows="10" formControlName="description"></textarea>
-                    </div>
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content partial">
-                                <!-- @Html.PartialAsync("IngredientPartial", Model.Ingredients) -->
-
-                                <app-ingredientspartialviewe [ingredints]="recipe?.Ingredients??[]" (updatedIng)="updateIngredients($event)" ></app-ingredientspartialviewe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 "></div>
-                <div class="col-md-6">
-                    <!-- <button type="submit" class="btn btn-@(Model.ID > 0 ? "warning" : "primary")">@($"{(Model.ID > 0 ? "Edit" : "Add")} recipe")</button> -->
-                    <!-- @if (Model.ID > 0)
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+          <!-- <button type="submit" class="btn btn-@(Model.ID > 0 ? "warning" : "primary")">@($"{(Model.ID > 0 ? "Edit" : "Add")} recipe")</button> -->
+          <!-- @if (Model.ID > 0)
                     {
                         <button data-id="@Model.ID" class="btn btn-danger" type="button" id="delrecipe">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     } -->
-                    <button type="submit" class="btn btn-primary ">Add Recipe</button>
-                    <button type="button" class="btn btn-danger "><i class="fas fa-trash-alt"></i></button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-
-    
+          <button type="submit" class="btn btn-primary" (click)="addRecipe()">Add Recipe</button>
+          <button type="button" class="btn btn-danger">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

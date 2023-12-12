@@ -67,6 +67,11 @@ export class RecipeTableListComponent implements OnInit {
     this.storage.set('recipeById', JSON.stringify(id));
     this.router.navigate(['/view']);
   }
+
+  onEdit(id:number){
+    this.storage.set('recipeById', JSON.stringify(id));
+    this.router.navigate(['/addRecipe']);
+  }
   addRecipe(){
     this.router.navigate(['/addRecipe']);
   }

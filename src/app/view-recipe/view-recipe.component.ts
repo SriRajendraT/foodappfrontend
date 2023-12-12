@@ -19,27 +19,28 @@ export class ViewRecipeComponent implements OnInit {
   ngOnInit(): void {
     this.getRecipeById();
   }
-  recipe: RecipeDetails=new RecipeDetails();
-ingretients:Ingredient[]=[];
-steps:string[]=[];
+  recipe: RecipeDetails = new RecipeDetails();
+  ingretients: Ingredient[] = [];
+  steps: string[] = [];
   getRecipeById() {
     console.log('get by id');
-    
+
     let kv = new KeyValues();
     let res = this.storage.get('recipeById');
 
     if (res) {
       let obj = parseInt(res);
-      
+
       kv.value = obj;
-      this.dataapi.getReceipeById(kv).subscribe((result: ApiResponse<RecipeDetails>) => {
+      this.dataapi
+        .getReceipeById(kv)
+        .subscribe((result: ApiResponse<RecipeDetails>) => {
           if (result) {
             this.recipe = result.Result;
-            this.ingretients=result.Result.Ingredients;
-            this.steps=this.recipe.DESCRIPTION.split(/\r\n|\r|\n/);
+            this.ingretients = result.Result.Ingredients;
+            this.steps = this.recipe.DESCRIPTION.split(/\r\n|\r|\n/);
             console.log(this.recipe.DESCRIPTION.split(/\r\n|\r|\n/));
             console.log(this.ingretients);
-            
           }
         });
     }

@@ -20,7 +20,7 @@
                 <tr *ngFor="let item of recipies">
                     <td class="options">
                        <i class="fa-solid fa-eye text-info " (click)="onView(item.ID)"></i>
-                        <i class="fa fa-edit text-warning "></i>
+                        <i class="fa fa-edit text-warning " (click)="onEdit(item.ID)"></i>
                         <span class="options" id="Favourite">
                             <div *ngIf="item.FAVOURITES=='Y'" (click)="changeFav(item.ID,false)" style="cursor: pointer;">
                                 <i class="fa-solid c-pink fa-heart"></i>

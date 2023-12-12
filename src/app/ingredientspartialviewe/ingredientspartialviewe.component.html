@@ -2,7 +2,9 @@
 <!-- @model List<Ingredient> -->
 
 <div class="bgimg">
+  <form [formGroup]="ingredientsForm" >
   <div class="modal-header">
+
     <h5 class="modal-title text-light" id="staticBackdropLabel">
       Ingredients :
     </h5>
@@ -10,48 +12,76 @@
       type="button"
       class="btn-close bg-danger"
       data-bs-dismiss="modal"
-      aria-label="Close"
+      aria-label="Close" (click)="addIngredients()"
     ></button>
   </div>
   <div class="modal-body tblb">
     <div class="row">
-      <div class="col-6 text-info"><h5>Item Name</h5></div>
-      <div class="col-6 text-info"><h5>Item Quantity</h5></div>
+      <div class="col-5 text-center text-success"><h5>Item Name</h5></div>
+      <div class="col-5 text-center text-success"><h5>Item Quantity</h5></div>
     </div>
-    <form [formGroup]="ingredientsForm" >
-
-    <div class="row ing" *ngFor="let item of ingredints">
-      <div class="col-6">
-        <input type="text"  class="form-control Name bgblur text-light " placeholder="Name" >
+      <div id="demo" class="collapse row">
+        <div class="col-6">
+          <input type="text"  class="form-control Name bgblur text-light " placeholder="Name" formControlName="ingredient_name" >
+         
+          <!-- @Html.TextBox($"Ingredients[{i}].INGREDIENT_NAME",Model[i].INGREDIENT_NAME,new {@class="form-control Name bgblur text-light",@placeholder="Name"}) -->
+        </div>
+        <div class="col-6">
+          <input type="text"  class="form-control Quantity bgblur text-light " placeholder="Quantity" formControlName="quantity" >
+          
+          <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
+        </div>
+        
+      </div>
+   
+    <div class="row ing" *ngFor="let item of ingredints;let i = index">
+      <div class="col-5 text-info   d-center">
+          {{item.INGREDIENT_NAME}}
+      </div>
+      <div class="col-5 text-info d-center">
+        {{item.QUANTITY}}
+    </div>
+    <div class="col-2">
+      <button type="button"  class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#demo" (click)="updateIng(i)" >
+        <i class="fa fa-edit"></i>
+      </button>
+      <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
+    </div>
+      <!-- <div class="col-6"> -->
+        <!-- <input type="text"  class="form-control Name bgblur text-light " placeholder="Name" formControlName="ingredient_name" > -->
        
         <!-- @Html.TextBox($"Ingredients[{i}].INGREDIENT_NAME",Model[i].INGREDIENT_NAME,new {@class="form-control Name bgblur text-light",@placeholder="Name"}) -->
-      </div>
+      <!-- </div>
       <div class="col-6">
-        <input type="text"  class="form-control Quantity bgblur text-light " placeholder="Quantity" >
+        <input type="text"  class="form-control Quantity bgblur text-light " placeholder="Quantity" formControlName="ingredient_quantity" > -->
         
         <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
-      </div>
+      <!-- </div> -->
       <!-- <input type="text" hidden class="recipe_id" [value]="item.RECIPE_ID">
       <input type="text" hidden class="id" [value]="item.ID"> -->
       <!-- @Html.Hidden($"Ingredients[{i}].RECIPE_ID",Model[i].RECIPE_ID ,new {@class="recipe_id"})
                     @Html.Hidden($"Ingredients[{i}].ID",Model[i].ID ,new {@class="id"}) -->
     </div>
-  </form>
+ 
   </div>
   <div class="modal-footer">
     <div class="row">
       <div class="col-12 d-flex justify-content-center align-items-center">
         <div class="btn-group">
-          <button class="btn btn-danger" type="button" id="delbtn" (click)="removeInput()">
+          <button *ngIf="!btn" class="btn btn-danger" type="button" id="delbtn" (click)="removeInput()">
             <i class="fa-solid fa-trash"></i>
           </button>
-          <button class="btn btn-success" type="button" id="add btn" (click)="addInput()">
+          <button *ngIf="!btn" (click)="btn = !btn" class="btn btn-success" type="button" id="add btn" data-bs-toggle="collapse" data-bs-target="#demo">
             <i class="fa-solid fa-plus"></i>
           </button>
+          <div class="col-12">
+            <button class="btn btn-success" *ngIf="btn" data-bs-toggle="collapse" data-bs-target="#demo" (click)="addInput()">Submit</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</form>
 </div>
 <!-- <script>
         $(document).on('click', '#delbtn', function () {
