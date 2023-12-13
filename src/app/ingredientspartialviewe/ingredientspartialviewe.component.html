@@ -17,16 +17,17 @@
   </div>
   <div class="modal-body tblb">
     <div class="row">
-      <div class="col-5 text-center text-success"><h5>Item Name</h5></div>
-      <div class="col-5 text-center text-success"><h5>Item Quantity</h5></div>
+      <div class="col-4 text-center text-success"><h5>Item Name</h5></div>
+      <div class="col-4 text-center text-success"><h5>Item Quantity</h5></div>
+      <div class="col-4 text-center text-success "><h5>Action</h5></div>
     </div>
       <div id="demo" class="collapse row">
-        <div class="col-6">
+        <div class="col-4">
           <input type="text"  class="form-control Name bgblur text-light " placeholder="Name" formControlName="ingredient_name" >
          
           <!-- @Html.TextBox($"Ingredients[{i}].INGREDIENT_NAME",Model[i].INGREDIENT_NAME,new {@class="form-control Name bgblur text-light",@placeholder="Name"}) -->
         </div>
-        <div class="col-6">
+        <div class="col-4">
           <input type="text"  class="form-control Quantity bgblur text-light " placeholder="Quantity" formControlName="quantity" >
           
           <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
@@ -35,16 +36,21 @@
       </div>
    
     <div class="row ing" *ngFor="let item of ingredints;let i = index">
-      <div class="col-5 text-info   d-center">
+      <div class="col-4 text-info   d-center">
           {{item.INGREDIENT_NAME}}
       </div>
-      <div class="col-5 text-info d-center">
+      <div class="col-4 text-info d-center">
         {{item.QUANTITY}}
     </div>
-    <div class="col-2">
-      <button type="button"  class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#demo" (click)="updateIng(i)" >
-        <i class="fa fa-edit"></i>
-      </button>
+    <div class="col-4">
+      <div class="col-12 d-center">
+        <button type="button" *ngIf="!btn" class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#demo" (click)="updateIng(i)" >
+          <i class="fa fa-edit"></i>
+        </button>
+        <button *ngIf="!btn" class="btn btn-danger" type="button" id="delbtn" (click)="removeInput(item.ID,i)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
       <!-- @Html.TextBox($"Ingredients[{i}].QUANTITY",Model[i].QUANTITY,new {@class="form-control Quantity bgblur text-light",@placeholder="Quantity"}) -->
     </div>
       <!-- <div class="col-6"> -->
@@ -68,9 +74,7 @@
     <div class="row">
       <div class="col-12 d-flex justify-content-center align-items-center">
         <div class="btn-group">
-          <button *ngIf="!btn" class="btn btn-danger" type="button" id="delbtn" (click)="removeInput()">
-            <i class="fa-solid fa-trash"></i>
-          </button>
+          
           <button *ngIf="!btn" (click)="btn = !btn" class="btn btn-success" type="button" id="add btn" data-bs-toggle="collapse" data-bs-target="#demo">
             <i class="fa-solid fa-plus"></i>
           </button>

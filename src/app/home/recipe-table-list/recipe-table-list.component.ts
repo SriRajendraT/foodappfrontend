@@ -73,6 +73,7 @@ export class RecipeTableListComponent implements OnInit {
     this.router.navigate(['/addRecipe']);
   }
   addRecipe(){
+    this.storage.remove('recipeById')
     this.router.navigate(['/addRecipe']);
   }
 }

@@ -16,6 +16,7 @@ import { KeyValues } from '../models/KeyValues-model';
 export class AddRecipeComponent implements OnInit {
   ingredientsArry:Ingredient[]=[];
   recipeForm: FormGroup = new FormGroup({});
+  btnDel:boolean=false;
   constructor(
     private dataapi: DataApiService,
     private builder: FormBuilder,
@@ -40,9 +41,11 @@ export class AddRecipeComponent implements OnInit {
     let recipeSave = this.recipeForm.value as RecipeDetails;
     recipeSave.Ingredients=this.ingredientsArry
     if(recipeSave.ID>0){
+      
       this.dataapi.addRecipe(recipeSave).subscribe((result: ApiResponse<boolean>) => {
         debugger;
         if (result) {
+          this.storage.remove('recipeById')
           this.router.navigate(['/']);
         }
       });
@@ -51,6 +54,7 @@ export class AddRecipeComponent implements OnInit {
       .addRecipe(recipeSave)
       .subscribe((result: ApiResponse<boolean>) => {
         if (result) {
+          this.storage.remove('recipeById');
           this.router.navigate(['/']);
         }
       });
@@ -63,6 +67,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onEdit(){
+    
     let id=this.storage.get('recipeById');
     let kv =new KeyValues();
     if(id){
@@ -70,11 +75,26 @@ export class AddRecipeComponent implements OnInit {
       kv.value=res;
       this.dataapi.getReceipeById(kv).subscribe((result:ApiResponse<RecipeDetails>)=>{
         if(result){
+          this.btnDel=true;
           console.log(result.Result);
           this.ingredientsArry=result.Result.Ingredients;
           this.recipeForm.patchValue(result.Result);
         }
       });
+    }
+  }
+
+  deleteRecipe(){
+    let id=this.recipeForm.value['ID'];
+    let kv=new KeyValues();
+    if(id){
+      let res=JSON.parse(id);
+      kv.value=res;
+      this.dataapi.deleteRecipeById(kv).subscribe((result:ApiResponse<boolean>)=>{
+        if(result){
+          this.router.navigate(['/']);
+        }
+      })
     }
   }
 }

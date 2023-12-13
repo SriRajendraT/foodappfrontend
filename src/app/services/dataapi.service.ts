@@ -47,6 +47,11 @@ export class DataApiService {
     deleteIngredientById(kv:KeyValues):Observable<ApiResponse<boolean>>{
         return this.http.post<ApiResponse<boolean>>(this.apiUrl+'DeleteIngredientById',kv);
     }
+
+    deleteRecipeById(kv:KeyValues):Observable<ApiResponse<boolean>> {
+        return this.http.post<ApiResponse<boolean>>(this.apiUrl+'DeleteRecipeById',kv);
+    }
+    
     private handleError(err:HttpErrorResponse):Observable<never>{
         
             console.log(err);

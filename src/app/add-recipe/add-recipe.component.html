@@ -100,7 +100,7 @@
                         </button>
                     } -->
           <button type="submit" class="btn btn-primary" (click)="addRecipe()">Add Recipe</button>
-          <button type="button" class="btn btn-danger">
+          <button type="button" class="btn btn-danger" *ngIf="btnDel" (click)="deleteRecipe()">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
