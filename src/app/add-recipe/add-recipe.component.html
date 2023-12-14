@@ -24,7 +24,7 @@
     </div>
     <form [formGroup]="recipeForm">
       <div class="row">
-        <!-- <div class="col-md-4 bgblur">
+        <div class="col-md-4 bgblur">
           <img
             src="https://cdn4.vectorstock.com/i/1000x1000/16/68/food-logo-template-vector-26541668.jpg"
             class="img-thumbnail"
@@ -32,9 +32,9 @@
           />
           <br />
           <input type="file" class="form-control" />
-        </div> -->
+        </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <!-- @Html.HiddenFor(x => x.ID,new {@class="form-control"}) -->
           <input
             type="text"
@@ -100,6 +100,7 @@
                         </button>
                     } -->
           <button type="submit" class="btn btn-primary" (click)="addRecipe()">Add Recipe</button>
+          &nbsp;&nbsp;
           <button type="button" class="btn btn-danger" *ngIf="btnDel" (click)="deleteRecipe()">
             <i class="fas fa-trash-alt"></i>
           </button>
