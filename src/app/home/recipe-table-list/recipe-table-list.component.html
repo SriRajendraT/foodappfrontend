@@ -3,14 +3,25 @@
     <h3 class="text-light">Your Recipe</h3>
     <hr>
     <div class="row mt-3 mb-3">
-        <div class="col-12 d-start">
+        <div class="col-6 d-start">
             <button type="button" class="btn btn-primary"  (click)="addRecipe()">
                 <i class="fa-solid fa-plus" ></i>
             </button>
         </div>
+        <div class="col-6 d-end">
+            <div class="btn-group change-view-buttons shadow">
+            <button  data-view="table-view" title="List view" (click)="changeView()">
+                    <i class="fa fa-list"></i>
+                </button>
+            <button  data-view="block-view" title="Grid view" (click)="changeView()">
+                    <i class="fa fa-grip"></i>
+                </button>
+            </div>
+            
+        </div>
     </div>
     <div class="row mt-3">
-        <div class="col-12 h-50 ">
+        <div class="col-12 h-50 " *ngIf="viewType">
             <table class="table table-striped text-center">
                 <tr>
                     <th class="text-light ">Action</th>

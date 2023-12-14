@@ -5,4 +5,6 @@ export class Recipe extends BaseClass {
     USER_ID!:number;
     DESCRIPTION:string='';
     FAVOURITES!:string;
+    RECIPE_TYPE_ID!:number;
+    IMAGE_ID!:string;
 }

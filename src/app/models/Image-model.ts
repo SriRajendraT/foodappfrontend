@@ -6,4 +6,5 @@ export class Image extends BaseClass {
     IMAGE_TYPE!:string;
     MODULE_TYPE!:string;
     MODULE_ID!:number;
+    TEMP_ID!:string;
 }

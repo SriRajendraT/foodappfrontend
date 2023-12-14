@@ -13,6 +13,7 @@ import { StorageService } from 'src/app/services/storage-services/storage.servic
 })
 export class RecipeTableListComponent implements OnInit {
   recipies: RecipeDetails[] = [];
+  viewType:boolean=true;
   @Input() flag: boolean = false;
 
   constructor(
@@ -27,6 +28,13 @@ export class RecipeTableListComponent implements OnInit {
     } else {
       this.getFav();
     }
+  }
+
+  changeView(){
+    console.log(this.viewType);
+    this.viewType=!this.viewType;
+    console.log(this.viewType);
+    
   }
 
   getRecipesList() {
